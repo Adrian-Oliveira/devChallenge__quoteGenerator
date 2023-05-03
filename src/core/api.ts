@@ -24,4 +24,25 @@ export default {
             console.error('Error:', error);
         }
     },
+    getQuotesByAuthor:async (author:string)=>{
+        try{
+            let options = {
+                method: 'GET',
+            };
+
+            let response = await fetch(`${baseUrl}?author=${author}`, options);
+            
+            if (!response.ok) {
+                throw new Error('Failed to get quote');
+            }
+            
+            const text = await response.text();
+            const objResponse = JSON.parse(text);
+
+            return objResponse.data;
+        }
+        catch(error){
+            console.error('Error:', error);
+        }
+    },
 }

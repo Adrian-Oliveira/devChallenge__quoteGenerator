@@ -67,3 +67,9 @@ select {
 	-moz-appearance: none;
 	appearance: none;
 }
+
+a {
+  color: inherit;
+  text-decoration: none;
+  cursor: auto;
+}

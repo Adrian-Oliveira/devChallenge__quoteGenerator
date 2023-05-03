@@ -1,9 +1,14 @@
 import { createSlice, createAsyncThunk, } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import { RootState } from '../store';
+import { RootState, AppDispatch } from '../store';
 
 import api from '../../core/api';
-import { useAppSelector, useAppDispatch } from '../../core/hooks';
+
+const createAppAsyncThunk = createAsyncThunk.withTypes<{
+  state: RootState
+  dispatch: AppDispatch
+}>()
+
 
 export interface QuoteState {
     quoteText:string,
@@ -30,14 +35,28 @@ const initialState:QuotesState = {
 }
 
 
-export const fetchSingleQuote = createAsyncThunk(
+export const fetchSingleQuote = createAppAsyncThunk(
   'quotes/fetchSingleQuote',
-  async () => {
-
-    const quoteNumber =  Math.floor(Math.random() * (72672) + 1);
+  async (_,thunkApi) => {
+    const totalQuotes = thunkApi.getState().quotes.totalQuotes;
+    const quoteNumber =  Math.floor(Math.random() * (totalQuotes) + 1);
     const response = await api.getQuote(quoteNumber)
-    console.log(response)
-    return response.data
+    const singleQuote = {
+        quoteText:response.data[0].quoteText,
+        quoteAuthor:response.data[0].quoteAuthor,
+        quoteGenre:response.data[0].quoteGenre
+    } 
+    return singleQuote
+  }
+)
+
+export const fetchAuthorQuotes = createAppAsyncThunk(
+  'quotes/fetchAuthorQuotes',
+  async (_,thunkApi) => {
+    const author = thunkApi.getState().quotes.author;
+    const response = await api.getQuotesByAuthor(author)
+    
+    return response
   }
 )
 
@@ -46,10 +65,13 @@ export const quotesSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(fetchSingleQuote.fulfilled, (state, action) => {
-
-      state.author = action.payload[0].quoteAuthor
-      state.singleQuote = action.payload[0]
+    builder
+    .addCase(fetchSingleQuote.fulfilled, (state, action: PayloadAction<QuoteState>) => {
+      state.author = action.payload.quoteAuthor
+      state.singleQuote = action.payload
+    })
+    .addCase(fetchAuthorQuotes.fulfilled, (state, action: PayloadAction<QuoteState[]>) => {
+      state.quoteList = action.payload
     })
   },
 })
