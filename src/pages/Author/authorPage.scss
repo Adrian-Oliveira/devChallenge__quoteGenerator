@@ -6,6 +6,37 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 10.1rem;
+    padding: 28rem 38.1rem 24.9rem 30.9rem;
+
+
+    &__getRandomQuoteButton{
+        position: fixed;
+        display: flex;
+        align-items: center;
+        top: 3.1rem;
+        right: 10rem;
+
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 120%;
+
+        color: #333333;
+    }
+
+    &__content{
+        display: flex;
+        flex-direction: column;
+        gap: 14rem;
+    }
+
+    &__author{
+        font-weight: 700;
+        font-size: 36px;
+        line-height: 42px;
+
+        color: #333333;
+
+        padding-left: 9.7rem;
+    }
     
 }
