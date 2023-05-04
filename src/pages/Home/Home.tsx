@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 
 import './homePage.scss';
 
+import Quote from '../../components/Quote';
+
 import { useAppDispatch, useAppSelector } from '../../core/hooks';
 import { fetchSingleQuote } from '../../redux/quotes/quotesSlice';
 import { useNavigate } from 'react-router-dom';
@@ -23,12 +25,10 @@ const Home = ()=> {
         <div className='homePage'>
 
             <button onClick={()=>{dispatch(fetchSingleQuote())}}>Random</button>
-            <h1><Link to="/author">{author}</Link></h1>
-            <div>
-                {JSON.stringify(singleQuote)}
-            </div>
+            <Quote {... singleQuote}/>
     
-            </div>
+            <h1><Link to="/author">{author}</Link></h1>
+        </div>
     );
 }
 
