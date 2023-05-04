@@ -53,6 +53,18 @@
         &__icon{
             color: transparent;
         }
+
+
+        &:hover{
+            background: #333333;
+
+            .homePage__goToAuthor__authorName{
+                color: #F2F2F2;
+            }
+            .homePage__goToAuthor__icon{
+                color: #F2F2F2;
+            }
+        }
     }
 
 }
