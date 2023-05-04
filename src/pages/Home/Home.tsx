@@ -36,12 +36,12 @@ const Home = ()=> {
     
             <Link to="/author" className='homePage__goToAuthor'>
                 <div>
-                    <h1>{author}</h1>
-                    <h2>{singleQuote.quoteGenre}</h2>
+                    <h1 className='homePage__goToAuthor__authorName'>{author}</h1>
+                    <h2 className='homePage__goToAuthor__quoteGender'>{singleQuote.quoteGenre}</h2>
                 </div>
                 
-                <i className="material-symbols-outlined">
-                    arrow_forward
+                <i className="material-symbols-outlined homePage__goToAuthor__icon">
+                    arrow_right_alt
                 </i>
             </Link>
         </div>
