@@ -7,7 +7,6 @@ import Quote from '../../components/Quote';
 
 import { useAppDispatch, useAppSelector } from '../../core/hooks';
 import { fetchSingleQuote } from '../../redux/quotes/quotesSlice';
-import { useNavigate } from 'react-router-dom';
 
 const Home = ()=> {
 
@@ -15,7 +14,6 @@ const Home = ()=> {
     const author = useAppSelector((store)=>store.quotes.author)
     const singleQuote = useAppSelector((store)=>store.quotes.singleQuote)
 
-    const navegate = useNavigate();
     
     useEffect(()=>{
         dispatch(fetchSingleQuote());
