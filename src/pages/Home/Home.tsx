@@ -24,10 +24,26 @@ const Home = ()=> {
     return(
         <div className='homePage'>
 
-            <button onClick={()=>{dispatch(fetchSingleQuote())}}>Random</button>
+            <button
+                className='homePage__getRandomQuoteButton' 
+                onClick={()=>{dispatch(fetchSingleQuote())}}>
+                    random
+                    <i className="material-symbols-outlined">
+                        autorenew
+                    </i>
+            </button>
             <Quote {... singleQuote}/>
     
-            <h1><Link to="/author">{author}</Link></h1>
+            <Link to="/author" className='homePage__goToAuthor'>
+                <div>
+                    <h1>{author}</h1>
+                    <h2>{singleQuote.quoteGenre}</h2>
+                </div>
+                
+                <i className="material-symbols-outlined">
+                    arrow_forward
+                </i>
+            </Link>
         </div>
     );
 }
